@@ -79,3 +79,24 @@ export async function PUT(request: Request, {params}: Args) {
   }
 
 }
+
+export async function DELETE(request: Request, {params}: Args) {
+  const {id} = params
+  const todo = await getTodo(id)
+  if(!todo){
+    return NextResponse.json({
+      messaje: `No se encontro el todo con el #id: ${id}`,
+      data: todo
+    }, {status: 404})
+  }
+  try {
+    await prisma.todo.delete({where: {id}})
+    
+    return NextResponse.json({messaje:`Se elimino el todo con el #id: ${id}`})
+  } catch (error) {
+    return NextResponse.json(error, {status: 400})
+  }
+
+
+  
+}
