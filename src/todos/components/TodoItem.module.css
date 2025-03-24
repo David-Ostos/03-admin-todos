@@ -1,0 +1,30 @@
+/* TodoItem.module.css */
+.todoItem {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  border-style: dashed;
+  border-width: 1px;
+  gap: 0.5rem;
+}
+
+.todoDone {
+  background-color: var(--todo-done-bg, rgb(239 246 255));
+  border-color: var(--todo-done-border, rgb(59 130 246));
+  text-decoration: line-through;
+}
+
+.todoPending {
+  background-color: var(--todo-pending-bg, rgb(254 242 242));
+  border-color: var(--todo-pending-border, rgb(239 68 68));
+}
+
+@media (min-width: 640px) {
+  .todoItem {
+    flex-direction: row;
+    gap: 0;
+  }
+}

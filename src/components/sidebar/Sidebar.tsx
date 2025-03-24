@@ -17,7 +17,7 @@ const itemSiderbar:SidebarItemProps[] = [
     icon: <IoCheckboxOutline size={30} />
   },
   {
-    title: 'Server Todos',
+    title: 'Server Actions',
     path: '/dashboard/server-todos',
     icon: <IoListOutline size={30} />
   }
