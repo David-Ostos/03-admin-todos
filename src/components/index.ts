@@ -7,3 +7,6 @@ export {SidebarItem} from "./sidebar/SidebarItem";
 
 // dashboard
 export {WidgetItem} from './dashboard/WidgetItem'
+
+// cookies
+export {TabBar} from './cookies/tabBar'

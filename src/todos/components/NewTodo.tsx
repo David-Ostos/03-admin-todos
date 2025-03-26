@@ -82,8 +82,10 @@ export const NewTodoActions = () => {
       >
         Crear
       </button>
-
-      <button className="flex flex-1 items-center justify-center rounded ml-2 bg-green-500 p-2 text-white hover:bg-green-700 transition-all" onClick={()=> getSeed()}> seed </button>
+      <div className="flex flex-1 ">
+        <button className="flex items-center justify-center rounded ml-2 bg-green-500 p-2 text-white hover:bg-green-700 transition-all" onClick={()=> getSeed()}> seed </button>
+        
+      </div>
 
       <button
         onClick={async() => await deleteCompleted()}
