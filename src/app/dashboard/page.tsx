@@ -1,4 +1,5 @@
 import {WidgetItem} from "@/components";
+import {SignIn, SignOut} from "@/components/signIn";
 
 const items = [
   {
@@ -18,9 +19,11 @@ const items = [
 export default function DashboardPage() {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-      {items.map((item) => (
+      <SignIn/>
+      <SignOut/>
+      {/* {items.map((item) => (
         <WidgetItem key={item.title} {...item} />
-      ))}
+      ))} */}
     </div>
   );
 }

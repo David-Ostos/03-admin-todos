@@ -13,6 +13,7 @@
     "cn": "^0.1.1",
     "cookies-next": "^5.1.0",
     "next": "15.2.3",
+    "next-auth": "^5.0.0-beta.25",
     "npm-check-updates": "^17.1.16",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

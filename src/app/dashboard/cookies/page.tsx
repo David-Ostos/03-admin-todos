@@ -17,7 +17,6 @@ export default async function CookiesPage() {
     }
     return 1
   }
-  console.log(selectedTab())
   
 
   return (
