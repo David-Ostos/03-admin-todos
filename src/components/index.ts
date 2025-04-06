@@ -10,3 +10,7 @@ export {WidgetItem} from './dashboard/WidgetItem'
 
 // cookies
 export {TabBar} from './cookies/tabBar'
+
+// buttons
+export {LogoutButton} from './sidebar/LogoutButton'
+export {LoginButton} from './sidebar/LoginButton'

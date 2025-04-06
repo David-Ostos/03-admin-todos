@@ -1,19 +1,11 @@
-import { PrismaClient } from '@prisma/client';
+import {PrismaClient} from "@prisma/client";
 
-// Crear un tipo personalizado que extienda el objeto global
-const globalWithPrisma = global as typeof globalThis & {
-  prisma: PrismaClient | undefined;
-};
+const globalForPrisma = globalThis as unknown as {prisma: PrismaClient};
 
-let prisma: PrismaClient;
+export const prisma =
+  globalForPrisma.prisma ||
+  new PrismaClient({
+    log: ["query", "info", "warn", "error"],
+  });
 
-if (process.env.NODE_ENV === 'production') {
-  prisma = new PrismaClient();
-} else {
-  if (!globalWithPrisma.prisma) {
-    globalWithPrisma.prisma = new PrismaClient();
-  }
-  prisma = globalWithPrisma.prisma;
-}
-
-export default prisma;
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;

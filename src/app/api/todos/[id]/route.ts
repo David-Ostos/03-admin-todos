@@ -1,4 +1,6 @@
-import prisma from '@/lib/prisma'
+// 
+
+import {prisma} from '@/lib/prisma'
 import { Todo } from '@prisma/client'
 import { NextResponse, NextRequest } from 'next/server'
 import { boolean, object, string } from 'yup'
