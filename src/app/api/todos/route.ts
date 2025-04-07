@@ -1,8 +1,12 @@
 // 
+import { getuserSessionServer } from "@/auth";
 import {prisma} from "@/lib/prisma";
 
 import {NextResponse /* NextRequest */} from "next/server";
 import {boolean, object, string} from "yup";
+
+
+
 export async function GET(request: Request) {
   const {searchParams} = new URL(request.url);
   const take = +(searchParams.get("take") ?? "10");
@@ -33,10 +37,16 @@ export async function GET(request: Request) {
 
 const postSchema = object({
   description: string().required(),
-  complete: boolean().optional().default(false),
+  complete: boolean().optional().default(false)
 });
 
 export async function POST(request: Request) {
+
+  const user = await getuserSessionServer()
+  if(!user){
+    return NextResponse.json('No autorizado', {status: 401})
+  }
+
   try {
     const {description, complete} = await postSchema.validate(
       await request.json()
@@ -52,7 +62,8 @@ export async function POST(request: Request) {
       );
     }
 
-    const todos = await prisma.todo.create({data: {description, complete}});
+    console.log({user})
+    const todos = await prisma.todo.create({data: {description, complete, userId: user.id}});
 
     return NextResponse.json({
       todos,
@@ -63,13 +74,19 @@ export async function POST(request: Request) {
 }
 
 export async function DELETE() {
+  const user = await getuserSessionServer()
+  if(!user){
+    return NextResponse.json('No autorizado', {status: 401})
+  }
   try {
     const todos = await prisma.todo.findMany({where: {complete: true}});
     if (todos.length === 0) {
       return NextResponse.json({messaje: "No hay registros completados"});
     }
 
-    const todo = await prisma.todo.deleteMany({where: {complete: true}});
+    const todo = await prisma.todo.deleteMany({
+      where: {complete: true, userId: user.id},
+    });
 
     return NextResponse.json({
       messaje: `Se ${

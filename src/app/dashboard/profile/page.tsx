@@ -9,7 +9,7 @@ export default function ProfilePage() {
   const {data: session} = useSession()
   
   useEffect(() => {
-    console.log({session})
+    // console.log({session})
   }, [session])
   
 

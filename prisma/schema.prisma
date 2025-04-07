@@ -9,24 +9,33 @@ datasource db {
 
 model Todo {
   id          String   @id @default(uuid())
+  userId      String   
   description String
   complete    Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 // Auth.js
 
 model User {
-  id            String          @id @default(uuid())
+  id            String    @id @default(uuid())
   name          String?
-  email         String          @unique
+  password      String?
+  roles         String[]  @default(["user"])
+  isActive      Boolean   @default(true)
+  email         String    @unique
   emailVerified DateTime?
   image         String?
+
   accounts      Account[]
   sessions      Session[]
   // Optional for WebAuthn support
   Authenticator Authenticator[]
+
+  todos Todo[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

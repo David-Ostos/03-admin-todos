@@ -53,11 +53,11 @@ export const Sidebar = async () => {
     ? session?.user?.image :
     "https://i.imgur.com/yhW6Yw1.jpg";
 
-    // const role = 
+    const userRoles = session?.user?.roles || ['user']; 
 
   return (
     <aside className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full flex flex-col justify-between h-screen border-r border-gray-300 shadow-right-only bg-white transition duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
-      <div className="pb-4 " >
+      <div className="pb-4 ">
         <div className="-mx-6 px-6 py-4">
           <Link href="/dashboard" title="home">
             <div className="flex gap-2 justify-center items-center">
@@ -83,10 +83,12 @@ export const Sidebar = async () => {
           />
           {session ? (
             <div>
-              <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
+              <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block capitalize">
                 {session?.user?.name}
               </h5>
-              <span className="hidden text-gray-400 lg:block">Admin</span>
+              <span className="hidden text-gray-400 lg:block capitalize">
+                {userRoles.join(", ")}
+              </span>
             </div>
           ) : (
             <h5 className="hidden mt-4 text-xl font-semibold text-gray-600 lg:block">
@@ -105,7 +107,7 @@ export const Sidebar = async () => {
       </div>
 
       <div className="px-6 -mx-6 pt-4 flex justify-between items-center border-t border-gray-300 cursor-pointer">
-          <LoginButton/>
+        <LoginButton />
       </div>
     </aside>
   );
